@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+  --primary: #ff4d6d;
+  --primary-hover: #ff758f;
+  --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+  --glass: rgba(255, 255, 255, 0.7);
+  --shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Floating Hearts Background */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  color: var(--primary);
+  opacity: 0.5;
+  animation: float 15s linear infinite;
+  font-size: 20px;
+}
+
+@keyframes float {
+  0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 450px;
+  width: 90%;
+  padding: 2.5rem;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gif-box {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: #c9184a;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: #590d22;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  min-height: 50px;
+  align-items: center;
+}
+
+.btn {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 35px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+}
+
+.btn-yes {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+.btn-yes:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.btn-no {
+  background-color: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-no:hover {
+  background-color: #fff0f3;
+}
+
+/* Success State Styles */
+.success h1 {
+  color: #ff4d6d;
+  font-size: 3rem;
+}
