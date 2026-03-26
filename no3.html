@@ -5,29 +5,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask Her Out</title>
-
   <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
+  <div class="hearts-container" id="hearts-container"></div>
+  
+  <!-- Music Toggle -->
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 50;">
+    <button id="music-toggle" style="
+        padding: 10px 15px;
+        background: rgba(255, 77, 109, 0.2);
+        border: 1px solid #ff4d6d;
+        color: #ff4d6d;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+    " onclick="toggleBackgroundMusic()">🔊</button>
+  </div>
+  
   <div class="container">
-    <div class="tenor-gif-embed" data-postid="15974530976611222074" data-share-method="host" data-aspect-ratio="1.26923"
-      data-width="100%">
-      <a href="https://tenor.com/view/peach-goma-phone-gif-15974530976611222074">Peach Goma Phone Sticker</a>from
-      <a href="https://tenor.com/search/peach+goma-stickers">Peach Goma Stickers</a>
-    </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <img src="./Static/images/peach-goma-phone.gif" alt="GIF" style="max-width: 100%; height: auto; border-radius: 15px;">
 
     <h1>Beautiful pls Man jao na! Kitna code likh waogi😭</h1>
     <p>Bhut glt baat hai yrr😭</p>
 
-    <div class="btn">
-      <a href="yes.html">Yes</a>
-      <a href="#" id="move-random">No</a>
+    <div class="btn-group">
+      <a href="yes.html" class="btn">Yes</a>
+      <button id="move-random" class="btn">No</button>
     </div>
   </div>
 
-  <script src="./script.js"></script>
+  <script>
+    const heartsContainer = document.getElementById('hearts-container');
+    let bgaudio = new Audio('https://assets.codepen.io/3685267/AdobeStock_126235000_Preview.mp3');
+    bgaudio.loop = true;
+    bgaudio.volume = 0.3;
+
+    function createMixedParticles() {
+      const types = ['heart', 'sparkle', 'bubble'];
+      const randomType = types[Math.floor(Math.random() * types.length)];
+      const particle = document.createElement('div');
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDuration = Math.random() * 3 + 2 + 's';
+      particle.style.opacity = Math.random() * 0.8 + 0.2;
+
+      if (randomType === 'heart') {
+        particle.classList.add('heart');
+        particle.innerHTML = '❤️';
+        particle.style.fontSize = Math.random() * 20 + 10 + 'px';
+      } else if (randomType === 'sparkle') {
+        particle.classList.add('sparkle');
+        particle.innerHTML = '✨';
+        particle.style.fontSize = Math.random() * 15 + 8 + 'px';
+      } else if (randomType === 'bubble') {
+        particle.classList.add('bubble');
+        const size = Math.random() * 20 + 10;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+      }
+
+      heartsContainer.appendChild(particle);
+      setTimeout(() => particle.remove(), 5000);
+    }
+
+    setInterval(createMixedParticles, 300);
+
+    function moveRandomEl(elm) {
+      elm.style.position = "absolute";
+      elm.style.top = Math.floor(Math.random() * 90 + 5) + "%";
+      elm.style.left = Math.floor(Math.random() * 90 + 5) + "%";
+    }
+
+    const moveButton = document.getElementById('move-random');
+    moveButton.addEventListener('mouseenter', () => {
+      moveRandomEl(moveButton);
+    });
+  </script>
 </body>
 
 </html>

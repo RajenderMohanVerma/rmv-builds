@@ -1,26 +1,148 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ask Her Out</title>
-
+  <title>You Said Yes! 💕</title>
   <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
-  <div class="container">
-    <div class="tenor-gif-embed" data-postid="253027946666209433" data-share-method="host" data-aspect-ratio="1.37853"
-      data-width="100%">
-      <a
-        href="https://tenor.com/view/mochi-cat-mochi-and-goma-goma-and-peach-mochi-mochi-peach-cat-gif-gif-253027946666209433">Mochi
-        Cat GIF</a>from <a href="https://tenor.com/search/mochi-gifs">Mochi GIFs</a>
-    </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <h1>I knew it! You Love me a lot 😘</h1>
+  <div class="hearts-container" id="hearts-container"></div>
+  
+  <!-- Music Toggle -->
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 50;">
+    <button id="music-toggle" style="
+        padding: 10px 15px;
+        background: rgba(255, 77, 109, 0.2);
+        border: 1px solid #ff4d6d;
+        color: #ff4d6d;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+    " onclick="toggleBackgroundMusic()">🔊</button>
   </div>
+
+  <!-- Gallery Modal -->
+  <div class="gallery-modal" id="gallery-modal">
+    <div class="gallery-content">
+      <span class="gallery-close">&times;</span>
+      <div class="gallery-carousel">
+        <img id="gallery-photo" src="" alt="Memory">
+        <p id="photo-caption" style="color: #ff4d6d; margin-top: 1rem;">Loading...</p>
+      </div>
+      <div class="gallery-nav">
+        <button id="prev-photo">← Previous</button>
+        <button id="next-photo">Next →</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container" id="main-container">
+    <img src="./Static/images/7.gif" alt="Success GIF" style="max-width: 100%; height: auto; border-radius: 15px;">
+    <h1>I knew it! You Love me! 💕</h1>
+    <p>You've made me the happiest person alive! 😘</p>
+    <button class="btn btn-gallery" id="gallery-btn" onclick="openGallery()">View Our Memories 💫</button>
+  </div>
+
+  <script>
+   const photoGallery = [
+  { src: './Static/images/first_img.jpg', caption: '💕 Us Together' },
+  { src: './Static/images/second_img.jpg', caption: '😍 You make me smile' },
+  { src: './Static/images/third_img.jpg', caption: '🌹 My Love' },
+  { src: './Static/images/fourth_img.jpg', caption: '💑 Forever & Always' }
+];
+
+    function openGallery() {
+      const modal = document.getElementById('gallery-modal');
+      modal.classList.add('active');
+      currentPhotoIndex = 0;
+      displayPhoto();
+    }
+
+    function displayPhoto() {
+      const photoImg = document.getElementById('gallery-photo');
+      const caption = document.getElementById('photo-caption');
+      if (photoGallery[currentPhotoIndex]) {
+        photoImg.src = photoGallery[currentPhotoIndex].src;
+        caption.textContent = `${currentPhotoIndex + 1} / ${photoGallery.length} - ${photoGallery[currentPhotoIndex].caption}`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('gallery-modal');
+      const closeBtn = document.querySelector('.gallery-close');
+      const prevBtn = document.getElementById('prev-photo');
+      const nextBtn = document.getElementById('next-photo');
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      prevBtn.addEventListener('click', () => {
+        currentPhotoIndex = (currentPhotoIndex - 1 + photoGallery.length) % photoGallery.length;
+        displayPhoto();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentPhotoIndex = (currentPhotoIndex + 1) % photoGallery.length;
+        displayPhoto();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+
+    // Celebratory confetti and burst
+    function celebrate() {
+      const duration = 15 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function () {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        }));
+        confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        }));
+      }, 250);
+    }
+
+    // Start celebration and music
+    window.addEventListener('load', () => {
+      celebrate();
+      if (bgaudio) {
+        bgaudio.play().catch(e => console.log('Audio failed:', e));
+      }
+    });
+
+    document.addEventListener('click', () => {
+      if (bgaudio && bgaudio.paused) {
+        bgaudio.play().catch(e => console.log('Audio failed:', e));
+      }
+    }, { once: true });
+  </script>
 </body>
 
 </html>

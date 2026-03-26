@@ -11,15 +11,45 @@
 <body>
     <div class="hearts-container" id="hearts-container"></div>
     
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="gallery-modal">
+        <div class="gallery-content">
+            <span class="gallery-close">&times;</span>
+            <div class="gallery-carousel">
+                <img id="gallery-photo" src="" alt="Memory">
+                <p id="photo-caption" style="color: #D4AF37; margin-top: 1rem;">Loading...</p>
+            </div>
+            <div class="gallery-nav">
+                <button id="prev-photo">← Previous</button>
+                <button id="next-photo">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Toggle (Optional) -->
+    <div style="position: fixed; top: 20px; right: 20px; z-index: 50;">
+        <button id="music-toggle" style="
+            padding: 10px 15px;
+            background: rgba(255, 77, 109, 0.2);
+            border: 1px solid #ff4d6d;
+            color: #ff4d6d;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        " onclick="toggleBackgroundMusic()">🔊</button>
+    </div>
+    
     <div class="container" id="main-container">
         <div class="gif-box" id="gif-container">
-            <div class="tenor-gif-embed" data-postid="22885016" data-share-method="host" data-aspect-ratio="1.04918" data-width="100%">
-                <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a>
-            </div>
+            <img src="./Static/images/manja.gif" alt="Manja Sticker" style="max-width: 100%; height: auto; border-radius: 15px;">
         </div>
 
         <h1 id="question">Do you love me? 🤗</h1>
         <p id="message">Rmv is all yours</p>
+
+        <!-- Gallery Button (Hidden until success) -->
+        <button class="btn btn-gallery" id="gallery-btn" style="display: none;">View Our Memories 💕</button>
 
         <div class="btn-group">
             <button class="btn btn-yes" id="yes-btn">Yes</button>

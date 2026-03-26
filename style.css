@@ -3,9 +3,15 @@
 :root {
   --primary: #ff4d6d;
   --primary-hover: #ff758f;
+  --secondary: #ff6b8a;
+  --rose-gold: #ff85a1;
+  --deep-burgundy: #c9184a;
+  --light-cream: #fff8f5;
   --bg-gradient: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
-  --glass: rgba(255, 255, 255, 0.7);
+  --glass: rgba(255, 255, 255, 0.85);
   --shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.2);
+  --glow: 0 0 20px rgba(255, 77, 109, 0.4);
+  --pink-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
 }
 
 * {
@@ -50,6 +56,31 @@ body {
   100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
 }
 
+/* Enhanced Particle Effects */
+.sparkle {
+  position: absolute;
+  animation: sparkleFloat 15s linear infinite;
+  font-size: 15px;
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(720deg) scale(0); opacity: 0; }
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  animation: bubbleFloat 12s ease-in infinite;
+  background: radial-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(199, 158, 97, 0.1));
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(110vh) translateX(0); opacity: 0.8; }
+  100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+}
+
 .container {
   position: relative;
   z-index: 10;
@@ -58,9 +89,9 @@ body {
   text-align: center;
   align-items: center;
   gap: 1.5rem;
-  max-width: 450px;
+  max-width: 500px;
   width: 90%;
-  padding: 2.5rem;
+  padding: 3rem 2.5rem;
   background: var(--glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -82,12 +113,15 @@ h1 {
   font-size: 2.5rem;
   color: #c9184a;
   margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+  font-weight: 700;
 }
 
 p {
   color: #590d22;
   font-weight: 400;
   font-size: 1.1rem;
+  letter-spacing: 0.5px;
 }
 
 .btn-group {
@@ -98,41 +132,191 @@ p {
   align-items: center;
 }
 
+/* Enhanced Button Styles */
 .btn {
-  text-decoration: none;
-  font-weight: 600;
-  padding: 12px 35px;
+  position: relative;
+  padding: 12px 32px;
+  border: 2px solid var(--primary);
   border-radius: 50px;
-  transition: all 0.3s ease;
+  background: rgba(255, 77, 109, 0.15);
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1.1rem;
-  border: none;
-  outline: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.1);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--glow), 0 6px 20px rgba(255, 77, 109, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: var(--glow), 0 2px 10px rgba(255, 77, 109, 0.2);
 }
 
 .btn-yes {
-  background-color: var(--primary);
-  color: white;
-  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
-}
-
-.btn-yes:hover {
-  background-color: var(--primary-hover);
-  transform: scale(1.05);
+  flex: 1;
+  background: linear-gradient(135deg, rgba(255, 77, 109, 0.2), rgba(255, 107, 138, 0.2));
 }
 
 .btn-no {
-  background-color: white;
-  color: var(--primary);
-  border: 2px solid var(--primary);
+  flex: 1;
+  background: rgba(255, 107, 138, 0.1);
+  border-color: var(--secondary);
+  color: var(--secondary);
 }
 
 .btn-no:hover {
-  background-color: #fff0f3;
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
+  box-shadow: var(--glow), 0 6px 20px rgba(255, 107, 138, 0.3);
 }
 
-/* Success State Styles */
-.success h1 {
-  color: #ff4d6d;
-  font-size: 3rem;
+/* Gallery Button */
+.btn-gallery {
+  background: linear-gradient(135deg, rgba(255, 133, 161, 0.2), rgba(255, 107, 138, 0.2));
+  border-color: var(--rose-gold);
+  color: var(--rose-gold);
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.btn-gallery:hover {
+  background: var(--rose-gold);
+  border-color: var(--rose-gold);
+  color: white;
+}
+
+/* Success State */
+.success {
+  animation: successPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Gallery Modal Styles */
+.gallery-modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.gallery-modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-content {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.gallery-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--primary);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.gallery-close:hover {
+  color: var(--primary-hover);
+}
+
+.gallery-carousel {
+  text-align: center;
+}
+
+.gallery-carousel img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+
+.gallery-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-nav button {
+  padding: 8px 16px;
+  background: rgba(255, 77, 109, 0.2);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-nav button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  .btn-group {
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 2rem 1.5rem;
+  }
+
+  .gif-box {
+    max-width: 200px;
+  }
 }

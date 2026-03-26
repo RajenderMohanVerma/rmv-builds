@@ -6,28 +6,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask Her Out</title>
-
   <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 </head>
 
 <body>
+  <div class="hearts-container" id="hearts-container"></div>
+  
+  <!-- Music Toggle -->
+  <div style="position: fixed; top: 20px; right: 20px; z-index: 50;">
+    <button id="music-toggle" style="
+        padding: 10px 15px;
+        background: rgba(255, 77, 109, 0.2);
+        border: 1px solid #ff4d6d;
+        color: #ff4d6d;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: 0.3s;
+    " onclick="toggleBackgroundMusic()">🔊</button>
+  </div>
+  
   <div class="container">
-    <div class="tenor-gif-embed" data-postid="15195810" data-share-method="host" data-aspect-ratio="1"
-      data-width="100%">
-      <a href="https://tenor.com/view/couple-forgive-me-asking-for-forgiveness-begging-crying-gif-15195810">Couple
-        Forgive Me Sticker</a>from
-      <a href="https://tenor.com/search/couple-stickers">Couple Stickers</a>
-    </div>
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <img src="./Static/images/couple-forgive-me.gif" alt="GIF" style="max-width: 100%; height: auto; border-radius: 15px;">
 
     <h1>Ek aur baar Soch lo! 😣</h1>
     <p>kyu aisa kar rahi ho Pls Maan jao😣</p>
 
-    <div class="btn">
-      <a href="yes.html">Yes</a>
-      <a href="no3.html">No</a>
+    <div class="btn-group">
+      <a href="yes.html" class="btn">Yes</a>
+      <a href="no3.html" class="btn">No</a>
     </div>
   </div>
+
+
 </body>
 
 </html>
